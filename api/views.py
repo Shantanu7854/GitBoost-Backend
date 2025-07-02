@@ -4,10 +4,12 @@ from rest_framework.response import Response
 import requests
 import google.generativeai as genai
 import os
+from django.views.decorators.csrf import csrf_exempt
+
 
 # Configure Gemini
 genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
-
+@csrf_exempt
 @api_view(["POST"])
 def analyze_github(request):
     username = request.data.get("username")
